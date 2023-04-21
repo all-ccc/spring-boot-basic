@@ -1,6 +1,7 @@
 package com.chaminju.firstproject.controller;
 
-import org.apache.tomcat.jni.Status;
+import javax.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.chaminju.firstproject.dto.request.ExampleDto;
+import com.chaminju.firstproject.dto.response.ExampleResponseDto;
 
 class ParamDto {
     private String data1;
@@ -110,5 +114,24 @@ public class RestApiController {
         return ResponseEntity.status(408).body(dto);
     }
 
+    @PostMapping("lombok")
+    public ResponseEntity<ExampleResponseDto> lombok(
+        @Valid @RequestBody ExampleDto requestBody
+    ) {
+        String data1 = requestBody.getParameter1();
+        String data2 = requestBody.getParameter2();
+        String data3 = requestBody.getParameter3();
+
+        // ExampleResponseDto responseData = 
+        //     new ExampleResponseDto(data1, data2, data3);
+
+        ExampleResponseDto responseData =
+            ExampleResponseDto.builder().data1(data1).build(); // builder를 통해 직접 지정해서 값 넣음
+        
+        System.out.println(responseData.toString());
+
+        return ResponseEntity.status(200).body(responseData);
+        
+    }
 
 }
