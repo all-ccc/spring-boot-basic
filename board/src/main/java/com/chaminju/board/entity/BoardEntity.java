@@ -9,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.chaminju.board.dto.request.board.postBoardRequestDto;
+import com.chaminju.board.dto.request.board.PostBoardRequestDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,7 +32,7 @@ public class BoardEntity {
     private String writeDatetime;
     private int viewCount;
 
-    public BoardEntity(postBoardRequestDto dto) {
+    public BoardEntity(PostBoardRequestDto dto) {
 
         Date now = new Date();
         SimpleDateFormat simpleDateFormat = 

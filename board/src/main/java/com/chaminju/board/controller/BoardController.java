@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.chaminju.board.dto.request.board.patchBoardRequestDto;
-import com.chaminju.board.dto.request.board.postBoardRequestDto;
+import com.chaminju.board.dto.request.board.PostBoardRequestDto;
+import com.chaminju.board.dto.request.board.PatchBoardRequestDto;
 import com.chaminju.board.dto.response.ResponseDto;
 import com.chaminju.board.dto.response.board.GetBoardListResponseDto;
 import com.chaminju.board.dto.response.board.GetBoardResponseDto;
@@ -34,7 +34,7 @@ public class BoardController {
     //* 1. 게시물 작성 */
     @PostMapping("")
     public ResponseEntity<ResponseDto> postBoard(
-        @Valid @RequestBody postBoardRequestDto requestBody
+        @Valid @RequestBody PostBoardRequestDto requestBody
     ) {
         ResponseEntity<ResponseDto> response = boardService.postBoard(requestBody);
         return response;
@@ -69,7 +69,7 @@ public class BoardController {
     //* 5. 특정 게시물 수정 */
     @PatchMapping("")
     public ResponseEntity<ResponseDto> patchBoard(
-        @Valid @RequestBody patchBoardRequestDto requestBody
+        @Valid @RequestBody PatchBoardRequestDto requestBody
     ) {
         ResponseEntity<ResponseDto> response =
             boardService.patchBoard(requestBody);

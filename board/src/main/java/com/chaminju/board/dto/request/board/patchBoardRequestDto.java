@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class patchBoardRequestDto {
+public class PatchBoardRequestDto {
     @NotBlank
     @Email
     private String userEmail;

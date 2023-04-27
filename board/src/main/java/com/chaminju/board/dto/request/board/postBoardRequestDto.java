@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class postBoardRequestDto {
+public class PostBoardRequestDto {
     @NotBlank
     @Email
     private String boardWriterEmail;

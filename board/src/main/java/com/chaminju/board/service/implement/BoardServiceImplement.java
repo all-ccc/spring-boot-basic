@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import com.chaminju.board.dto.request.board.patchBoardRequestDto;
-import com.chaminju.board.dto.request.board.postBoardRequestDto;
+import com.chaminju.board.dto.request.board.PatchBoardRequestDto;
+import com.chaminju.board.dto.request.board.PostBoardRequestDto;
 import com.chaminju.board.dto.response.ResponseDto;
 import com.chaminju.board.dto.response.board.GetBoardListResponseDto;
 import com.chaminju.board.dto.response.board.GetBoardResponseDto;
@@ -31,7 +30,7 @@ public class BoardServiceImplement implements BoardService {
     }
 
     @Override
-    public ResponseEntity<ResponseDto> postBoard(postBoardRequestDto dto) {
+    public ResponseEntity<ResponseDto> postBoard(PostBoardRequestDto dto) {
         // service 작업 전 기본틀 맞추고 시작
         ResponseDto body = null;
         String boardWriterEmail = dto.getBoardWriterEmail();
@@ -79,7 +78,7 @@ public class BoardServiceImplement implements BoardService {
     }
 
     @Override
-    public ResponseEntity<ResponseDto> patchBoard(patchBoardRequestDto dto) {
+    public ResponseEntity<ResponseDto> patchBoard(PatchBoardRequestDto dto) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'patchBoard'");
     }
