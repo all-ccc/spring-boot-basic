@@ -3,11 +3,8 @@ package com.chaminju.board.dto.response.board;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
-
 import com.chaminju.board.dto.response.ResponseDto;
 import com.chaminju.board.entity.resultSet.BoardListResultSet;
-import com.mysql.cj.protocol.Resultset;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

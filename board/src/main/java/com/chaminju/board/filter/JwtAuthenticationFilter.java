@@ -1,4 +1,4 @@
-package com.chaminju.firstproject.filter;
+package com.chaminju.board.filter;
 
 import java.io.IOException;
 
@@ -17,42 +17,40 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.chaminju.firstproject.provider.JwtTokenProvider;
-import com.chaminju.firstproject.provider.UserRole;
+import com.chaminju.board.provider.JwtProvider;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
-
-    private JwtTokenProvider jwtTokenProvider;
+    
+    private JwtProvider jwtProvider;
 
     @Autowired
-    public JwtAuthenticationFilter(JwtTokenProvider jwtTokenProvider) {
-        this.jwtTokenProvider = jwtTokenProvider;
+    public JwtAuthenticationFilter(JwtProvider jwtProvider) {
+        this.jwtProvider = jwtProvider;
     }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-
+       
         try {
-            
+
             String jwt = parseToken(request);
 
             boolean hasJwt = jwt != null;
             if (!hasJwt) {
                 filterChain.doFilter(request, response);
                 return;
-            } 
+            }
 
-            UserRole subject = jwtTokenProvider.validate(jwt);
-            
-            AbstractAuthenticationToken authenticationToken = 
-                new UsernamePasswordAuthenticationToken(subject, null, AuthorityUtils.NO_AUTHORITIES);
+            String email = jwtProvider.validate(jwt);
+
+            AbstractAuthenticationToken authenticationToken =
+                new UsernamePasswordAuthenticationToken(email, null, AuthorityUtils.NO_AUTHORITIES);
             authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
             SecurityContext securityContext = SecurityContextHolder.createEmptyContext();
             securityContext.setAuthentication(authenticationToken);
-
             SecurityContextHolder.setContext(securityContext);
 
         } catch(Exception exception) {
@@ -60,24 +58,26 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
 
         filterChain.doFilter(request, response);
-      
+
     }
 
+    // 토큰 parsing 하는 거
     private String parseToken(HttpServletRequest request) {
-        //* Request Header 중 "Authorization" : "Bearer eyJh..." 를 가져오는 */
+
         String token = request.getHeader("Authorization");
 
-        boolean hasToken = token != null && !token.equalsIgnoreCase(null);
+        boolean hasToken =
+            token != null &&
+            !token.equalsIgnoreCase("null");
         if (!hasToken) return null;
 
-        //* "Bearer eyJh..." 를 뽑아내는 거 
         boolean isBearer = token.startsWith("Bearer ");
         if (!isBearer) return null;
 
-        //* "Bearer eyJh..." 에서 실제 토큰만 가져오겠다 
         String jwt = token.substring(7);
         return jwt;
-
     }
     
+
+
 }

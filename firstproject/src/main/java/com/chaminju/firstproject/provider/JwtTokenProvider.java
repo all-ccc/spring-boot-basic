@@ -24,23 +24,29 @@ public class JwtTokenProvider {
     public String create(String subject) {
 
         Date expiredDate = Date.from(Instant.now().plus(1, ChronoUnit.HOURS));
+        String id = "qwer";
+        int role = 1;
 
         String jwt = Jwts.builder()
                         .signWith(SignatureAlgorithm.HS256, SECRET_KEY)
-                        .setSubject(subject)
-                        .setIssuedAt(new Date())
-                        .setExpiration(expiredDate)
+                        // .setSubject(subject)
+                        // .setIssuedAt(new Date())
+                        // .setExpiration(expiredDate)
+                        .claim("id", id)
+                        .claim("role", role)
                         .compact();
         return jwt;
     }
 
     //* JWT 검증 */
-    public String validate(String jwt) {
+    public UserRole validate(String jwt) { // UserRole 만들어줌
         Claims claims = Jwts.parser()
                             .setSigningKey(SECRET_KEY)
                             .parseClaimsJws(jwt)
                             .getBody();
-        return claims.getSubject();
+        String id = (String) claims.get("id");
+        int role = (Integer) claims.get("role");
+        return new UserRole(id, role);
     }
 
 }

@@ -16,7 +16,7 @@ public class WebSecurityConfig {
     
     private JwtAuthenticationFilter jwtAuthenticationFilter;
 
-    public WebSecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) { 
+    public WebSecurityConfig(JwtAuthenticationFilter jwtAuthenticationFilter) {
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
     } // DI 해줌
 
