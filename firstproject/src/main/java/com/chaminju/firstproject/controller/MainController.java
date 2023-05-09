@@ -35,7 +35,7 @@ public class MainController {
     }
 
     @PostMapping("/jwt")
-    public String validJwt(@RequestBody String jwt) {
+    public UserRole validJwt(@RequestBody String jwt) {
         return mainService.validJwt(jwt);
     }
  

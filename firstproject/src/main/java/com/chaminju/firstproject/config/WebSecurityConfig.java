@@ -26,7 +26,7 @@ public class WebSecurityConfig {
                     .csrf().disable()
                     .httpBasic().disable()
                     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                    .authorizeRequests().antMatchers("/jwt/**").permitAll() // 모든 패턴에 대해 허용
+                    .authorizeRequests().antMatchers("/jwt/**", "/file/**").permitAll() // 모든 패턴에 대해 허용
                     .anyRequest().authenticated();
 
         httpSecurity.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);

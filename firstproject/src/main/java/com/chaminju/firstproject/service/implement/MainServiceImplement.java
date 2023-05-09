@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.chaminju.firstproject.provider.JwtTokenProvider;
+import com.chaminju.firstproject.provider.UserRole;
 import com.chaminju.firstproject.service.MainService;
 
 @Component
@@ -28,8 +29,8 @@ public class MainServiceImplement implements MainService {
     }
 
     @Override
-    public String validJwt(String jwt) {
-       String subject = jwtTokenProvider.validate(jwt);
+    public UserRole validJwt(String jwt) {
+       UserRole subject = jwtTokenProvider.validate(jwt);
        return subject;
     }
     
