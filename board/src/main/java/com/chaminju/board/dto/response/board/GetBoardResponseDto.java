@@ -18,7 +18,7 @@ import lombok.Setter;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class GetBoardResponseDto extends ResponseDto { // 공통적으로 code, message가 들어가기 떄문에 상속 받음
+public class GetBoardResponseDto extends ResponseDto { // 공통적으로 code, message가 들어가기 때문에 상속 받음
     private int boardNumber;
     private String boardTitle;
     private String boardContent;
